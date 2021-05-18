@@ -1,0 +1,87 @@
+<div class="allForm">
+
+    <mat-form-field class="formname">
+        <mat-label>Введите имя</mat-label>
+        <input #firstname matInput placeholder="имя" type="text" required [formControl]="firstNameFormControl" (input) = "inputnamef(firstname.value)">
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+            Не <strong>ввели</strong> имя
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="formname">
+        <mat-label>Введите фамилию</mat-label>
+        <input #secondname matInput placeholder="фамилия" type="text" required required [formControl]="secondNameFormControl" (input) = "inputnames(secondname.value)">
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+            Не <strong>ввели</strong> фамилию
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Когда вы родились</mat-label>
+        <input #dayOFBirth matInput [matDatepicker]="picker" required (dateInput)="inputd(dayOFBirth.value)" placeholder="DOB(DD-MM-YYYY)" required formControlName="dob" readonly>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
+    </mat-form-field>
+
+    <div class="selectLabel">
+
+        <mat-form-field class = "select" appearance="fill">
+            <mat-label>Какую Js библиотеку используете</mat-label>
+            <mat-select (selectionChange)=Selectframework($event)>
+              <mat-option value="Angular">Angular</mat-option>
+              <mat-option value="React">React</mat-option>
+              <mat-option value="Vue">Vue</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class = "select" appearance="fill">
+            <mat-label>Какую версию Angular используете</mat-label>
+            <mat-select [disabled]="disableSelectAngular.value" (selectionChange)=SelectframeworkVersionAngular($event)>
+              <mat-option value="1.1.1">1.1.1</mat-option>
+              <mat-option value="1.2.1">1.2.1</mat-option>
+              <mat-option value="1.3.3">1.3.3</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field class = "select" appearance="fill">
+            <mat-label>Какую версию React используете</mat-label>
+            <mat-select [disabled]="disableSelectReact.value" (selectionChange)=SelectframeworkVersionReact($event)>
+              <mat-option value="2.1.2">2.1.2</mat-option>
+              <mat-option value="3.2.4">3.2.4</mat-option>
+              <mat-option value="4.3.1">4.3.1</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class = "select" appearance="fill">
+            <mat-label>Какую версию Vue используете</mat-label>
+            <mat-select [disabled]="disableSelectVue.value" (selectionChange)=SelectframeworkVersionVue($event)>
+              <mat-option value="3.3.1">3.3.1</mat-option>
+              <mat-option value="5.2.1">5.2.1</mat-option>
+              <mat-option value="5.1.3">5.1.3</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>    
+
+    <mat-form-field class = "formEH">
+        <mat-label>Введите електронный адрес</mat-label>
+        <input #inpute type="email" matInput [formControl]="emailFormControl" placeholder="example@example.example" required (input) = "inputemail(inpute.value)">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Пожалуйста введите <strong>електронный адрес</strong>
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+            Не <strong>ввели</strong> електронный адрес
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field class = "formEH">
+        <mat-label>Какие у вас увлечения</mat-label>
+        <textarea #inputh matInput placeholder="увлечения" required (input) = "inputhobby(inputh.value)" [formControl]="inputhobbyFormControl"></textarea>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+           Введите хотя бы одно увлечение
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" (click) = "sendAllData()">Отправить</button>
+
+</div>
